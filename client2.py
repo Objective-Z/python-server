@@ -9,5 +9,13 @@ s.connect((HOST, PORT))
 while True:
 	print (s.recv(1024))
 	message = raw_input(">")
-	s.send(str.encode(message))
+	if message == 'send file':
+		path = raw_input()
+		f = open(path)
+		l = f.read(1024)
+		s.send(b"someone is sending you a file...\n" + l)
+		#s.send(l)
+	else:
+		s.send(str.encode(message))
+	
 #s.close()
